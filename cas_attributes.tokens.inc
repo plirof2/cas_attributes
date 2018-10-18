@@ -83,23 +83,24 @@ $replacements += token_generate('array', array($token => $original), array('arra
 //try to get schcode (Ypepth code)
 $original= '[current-user:cas:attribute:schcode]';
 $value=$attribute['edupersonorgunitdn:gsnunitcode:extended'];
-$exploded_value=explode($value);
-$value=end($exploded_value); //JON : ASSUME that the last item is the SCH CODE/YPEPETH CODE we want
+$value_array_imploded=implode( ", ", $value );
+$value=mb_substr($value_array_imploded, -7); // we assube (for schools) that the last 7 chars are their schcode
 if (!is_array($value)) {            $value = array($value);          }
 $replacements += token_generate('array', array($token => $original), array('array' => $value), $options);
 
-
+/*
 $original= '[current-user:cas:attribute:edupersonorgunitdn-gsnunitcode]';
 $value=$attribute['edupersonorgunitdn:gsnunitcode'];
 if (!is_array($value)) {            $value = array($value);          }
 $replacements += token_generate('array', array($token => $original), array('array' => $value), $options);
+*/
 
-
+/*
 $original= '[current-user:cas:attribute:edupersonorgunitdn-cn-extended]';
 $value=$attribute['edupersonorgunitdn:cn:extended'];
 if (!is_array($value)) {            $value = array($value);          }
 $replacements += token_generate('array', array($token => $original), array('array' => $value), $options);
-
+*/
 
 
 if($debug_me)  drupal_set_message("add_fixed_tokens replacements : ".'<pre>'. print_r($replacements, true) .'</pre>');   //debug JON 161104
